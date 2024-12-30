@@ -12,9 +12,9 @@ const products = [
 
 function ProductList() {
   return (
-    <div className="my-10 p-5 rounded-xl bg-softCream">
+    <div className="my-10 p-5 rounded-xl bg-softCream shadow-xl">
       <table className="w-full table-fixed text-center ">
-        <thead className="text-xl font-script">
+        <thead className="text-xl font-script text-charcoalGray">
           <tr>
             <th>Product</th>
             <th>Count</th>
