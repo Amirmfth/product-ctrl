@@ -1,28 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function ProductItem({ name }) {
   const [status, setStatus] = useState("Good");
-  const [count, setCount] = useState(0);
+  const [description, setDescription] = useState("");
+  const desc = useRef(null)
 
   useEffect(() => {
     if (status === "Zero") {
-      setCount(0);
+      setDescription(0);
     }
   }, [status]);
+
+
+  const handleInput = () => {
+    const textarea = desc.current;
+    if (textarea) {
+      textarea.style.height = 'auto'; // Reset height to calculate the scrollHeight
+      textarea.style.height = `${textarea.scrollHeight}px`; // Adjust to scroll height
+    }
+  };
 
   return (
     <tr className="odd:bg-opacity-50 odd:bg-warmBeige  even:bg-warmBeige  border-b ">
       {/* Product */}
-      <td className="p-2"><p className="p-1 bg-softCream bg-opacity-50 rounded-xl">{name}</p></td>
-      {/* Count */}
       <td className="p-2">
-        <input
-          type="text"
-          className="w-12 p-2 rounded-xl"
-          value={count}
-          onChange={(e) => setCount(e.target.value)}
-          disabled={status === "Zero"}
-        />
+        <p className="p-1 bg-softCream bg-opacity-50 rounded-xl">{name}</p>
       </td>
       {/* Status */}
       <td className="p-2">
@@ -47,6 +49,17 @@ function ProductItem({ name }) {
             Zero
           </option>
         </select>
+      </td>
+      {/* Description */}
+      <td className="p-2">
+        <textarea
+          id="description"
+          rows="1"
+          className="w-full p-2  rounded-xl resize-none overflow-hidden focus:outline-none"
+          placeholder="description..."
+          ref={desc}
+          onInput={handleInput}
+        ></textarea>
       </td>
     </tr>
   );
