@@ -10,10 +10,15 @@ export default async function handler(req, res) {
 
   if (req.method === "GET") {
     const products = await Products.find();
-    res.status(200).json({ status: "success", data: products });
+    res.status(200).json({ status: "success", products });
   } else if (req.method === "POST") {
-    const { type, name, status, description } = req.body;
-    const products = await Products.create({ type, name, status, description });
-    res.status(200).json({ status: "success", data: products });
+    const { productType, name, status, description } = req.body;
+    const products = await Products.create({
+      productType,
+      name,
+      status,
+      description,
+    });
+    res.status(200).json({ status: "success", products });
   }
 }

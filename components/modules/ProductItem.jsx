@@ -1,49 +1,55 @@
-import React, { useEffect, useRef, useState } from "react";
+import { handleDescription, handleStatus } from "@/redux/features/product/productSlice";
+import React, { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 
-function ProductItem({ name , id }) {
-  const [status, setStatus] = useState("Good");
-  const desc = useRef(null)
-
+function ProductItem(product) {
+  const { _id, name, description, status } = product;
+  const desc = useRef(null);
+  const dispatch = useDispatch();
 
   // handlers
   const handleInput = () => {
     const textarea = desc.current;
     if (textarea) {
-      textarea.style.height = 'auto'; // Reset height to calculate the scrollHeight
+      textarea.style.height = "auto"; // Reset height to calculate the scrollHeight
       textarea.style.height = `${textarea.scrollHeight}px`; // Adjust to scroll height
     }
   };
 
-  const changeHandler = (e) => {
-    console.log({value:e.target.value , id});
+  const StatusChangeHandler = (e) => {
+    dispatch(handleStatus({ id: _id, status: e.target.value }));
   }
+
+  const descriptionChangeHandler = (e) => {
+    dispatch(handleDescription({ id: _id, description: e.target.value }));
+  };
 
   return (
     <tr className="odd:bg-opacity-50 odd:bg-warmBeige even:bg-warmBeige  border-b ">
       {/* Product */}
       <td className="p-2">
-        <p className="p-1 bg-softCream bg-opacity-50 rounded-md">{name}</p>
+        <p className="p-1 bg-softCream bg-opacity-50 rounded-md ">{name}</p>
       </td>
       {/* Status */}
       <td className="p-2">
         <select
           className={`rounded-md shadow-md p-2  ${
-            status === "Good"
+            status === "good"
               ? "bg-mutedGreen"
-              : status === "Low"
+              : status === "low"
               ? "bg-goldenYellow"
               : "bg-terracottaRed"
           } `}
           value={status}
-          onChange={(e) => setStatus(e.target.value)}
+          onChange={StatusChangeHandler}
         >
-          <option className="bg-mutedGreen" value="Good">
+          <option className="bg-mutedGreen" value="good">
             Good
           </option>
-          <option className="bg-goldenYellow" value="Low">
+          <option className="bg-goldenYellow" value="low">
             Low
           </option>
-          <option className="bg-terracottaRed" value="Zero">
+          <option className="bg-terracottaRed" value="zero">
             Zero
           </option>
         </select>
@@ -56,8 +62,9 @@ function ProductItem({ name , id }) {
           className="w-full p-2 rounded-md resize-none overflow-hidden focus:outline-none"
           placeholder="description..."
           ref={desc}
+          value={description}
           onInput={handleInput}
-          onChange={changeHandler}
+          onChange={descriptionChangeHandler}
         ></textarea>
       </td>
     </tr>

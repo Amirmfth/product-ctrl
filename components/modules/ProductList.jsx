@@ -4,7 +4,7 @@ import ProductItem from "./ProductItem";
 function ProductList({products}) {
   return (
     <div className="my-10 p-5 rounded-xl bg-softCream shadow-xl">
-      <table className="w-full table-auto text-center ">
+      <table className="w-full table-fixed text-center ">
         <thead className="text-xl font-script text-charcoalGray">
           <tr>
             <th>Product</th>
@@ -14,7 +14,7 @@ function ProductList({products}) {
         </thead>
         <tbody>
           {products.map((product) => (
-            <ProductItem key={product.id} {...product} />
+            <ProductItem key={product._id} {...product} />
           ))}
         </tbody>
       </table>
