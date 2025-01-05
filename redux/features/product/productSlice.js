@@ -9,7 +9,7 @@ const initialState = {
 };
 
 const setProducts = createAsyncThunk("product/setProducts", async () => {
-  const products = await axios.get("http://localhost:3000/api/products");
+  const products = await axios.get("/api/products");
   return products.data.products;
 });
 
