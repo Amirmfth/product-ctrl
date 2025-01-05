@@ -12,13 +12,21 @@ export default async function handler(req, res) {
     const products = await Products.find();
     res.status(200).json({ status: "success", products });
   } else if (req.method === "POST") {
-    const { productType, name, status, description } = req.body;
-    const products = await Products.create({
-      productType,
-      name,
-      status,
-      description,
-    });
-    res.status(200).json({ status: "success", products });
+    try {
+      const newProducts = req.body.products;
+      newProducts.forEach(async (product) => {
+        const prevProd = await Products.findOne({ _id: product._id });
+        prevProd.status = product.status;
+        prevProd.description = product.description;
+        prevProd.save();
+      });  
+    } catch (error) {
+      return res.status(500)
+      .json({ status: "failed", message: "List update failed" });
+    }
+
+    res
+      .status(200)
+      .json({ status: "success", message: "List updated successfully" });
   }
 }

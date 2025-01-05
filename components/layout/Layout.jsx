@@ -13,7 +13,7 @@ function Layout({ children }) {
               <i className="fa-solid fa-martini-glass-citrus"></i>
             </a>
             <a href="#desserts" className="text-xl p-2 rounded-xl bg-softCream">
-              <i class="fa-solid fa-ice-cream"></i>
+              <i className="fa-solid fa-ice-cream"></i>
             </a>
             <a
               href="#accessoires"
@@ -25,9 +25,9 @@ function Layout({ children }) {
         </div>
       </header>
       {children}
-      <footer className="w-full items-center">
+      <footer className="w-full text-center text-charcoalGray pb-6">
         <p>
-          developed by <code>Amir</code> with ❤️
+          developed by <b className=" text-2xl">Amir</b> with<b className=" text-2xl">❤️</b> 
         </p>
       </footer>
     </div>
