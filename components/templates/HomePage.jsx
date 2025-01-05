@@ -1,5 +1,6 @@
 import React from "react";
 import ProductList from "../modules/ProductList";
+import products from "@/data/products";
 
 function HomePage() {
   return (
@@ -9,13 +10,13 @@ function HomePage() {
         <p>Drinks</p>
         <i className="fa-solid fa-martini-glass-citrus"></i>
       </h1>
-      <ProductList />
+      <ProductList products={products.drinks} />
       <h1 className="w-fit flex space-x-5 mx-auto p-3 px-10 rounded-xl font-script text-charcoalGray text-4xl font-bold bg-softSage">
         <i className="fa-solid fa-utensils"></i>
         <p>Salon Assets</p>
         <i className="fa-solid fa-utensils"></i>
       </h1>
-      <ProductList />
+      <ProductList products={products.drinks} />
     </section>
   );
 }

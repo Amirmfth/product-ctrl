@@ -1,17 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function ProductItem({ name }) {
+function ProductItem({ name , id }) {
   const [status, setStatus] = useState("Good");
-  const [description, setDescription] = useState("");
   const desc = useRef(null)
 
-  useEffect(() => {
-    if (status === "Zero") {
-      setDescription(0);
-    }
-  }, [status]);
 
-
+  // handlers
   const handleInput = () => {
     const textarea = desc.current;
     if (textarea) {
@@ -20,16 +14,20 @@ function ProductItem({ name }) {
     }
   };
 
+  const changeHandler = (e) => {
+    console.log({value:e.target.value , id});
+  }
+
   return (
-    <tr className="odd:bg-opacity-50 odd:bg-warmBeige  even:bg-warmBeige  border-b ">
+    <tr className="odd:bg-opacity-50 odd:bg-warmBeige even:bg-warmBeige  border-b ">
       {/* Product */}
       <td className="p-2">
-        <p className="p-1 bg-softCream bg-opacity-50 rounded-xl">{name}</p>
+        <p className="p-1 bg-softCream bg-opacity-50 rounded-md">{name}</p>
       </td>
       {/* Status */}
       <td className="p-2">
         <select
-          className={`rounded-xl shadow-md p-2  ${
+          className={`rounded-md shadow-md p-2  ${
             status === "Good"
               ? "bg-mutedGreen"
               : status === "Low"
@@ -55,10 +53,11 @@ function ProductItem({ name }) {
         <textarea
           id="description"
           rows="1"
-          className="w-full p-2  rounded-xl resize-none overflow-hidden focus:outline-none"
+          className="w-full p-2 rounded-md resize-none overflow-hidden focus:outline-none"
           placeholder="description..."
           ref={desc}
           onInput={handleInput}
+          onChange={changeHandler}
         ></textarea>
       </td>
     </tr>
