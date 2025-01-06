@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
     function generateHtml(data) {
       return `<ul>${data
-        .map((item) => `<li>${item.name}: ${item.status}</li>`)
+        .map((item) => `<li>${item.name}: ${item.status} - ${item.description}</li>`)
         .join("")}</ul>`;
     }
 
